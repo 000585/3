@@ -1,0 +1,9 @@
+﻿[package]
+name = "chudo-p2p"
+version = "0.7.0"
+edition = "2021"
+
+[dependencies]
+chudo-core = { path = "../chudo-core" }
+tokio = { workspace = true }
+serde = { workspace = true }

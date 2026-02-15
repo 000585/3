@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHUDO Wallet</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #1a1a2e; color: #fff; }
+        .card { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        input { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        button { background: #e94560; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #c73e54; }
+        .success { color: #4ecca3; }
+        .error { color: #e94560; }
+        .address { font-family: monospace; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; word-break: break-all; }
+        input[type="number"] { width: calc(50% - 5px); display: inline-block; }
+        .flex { display: flex; gap: 10px; }
+        .flex input { flex: 1; }
+    </style>
+</head>
+<body>
+    <h1>CHUDO Wallet v0.6.2</h1>
+    
+    <div class="card">
+        <h3>Баланс</h3>
+        <div class="flex">
+            <input type="text" id="addr" value="genesis" placeholder="Введите адрес">
+            <button onclick="refresh()">Обновить</button>
+        </div>
+        <p>Баланс: <span id="balance">-</span> CHUDO</p>
+    </div>
+
+    <div class="card">
+        <h3>Отправить транзакцию</h3>
+        <input type="text" id="from" value="genesis" placeholder="Отправитель">
+        <input type="text" id="to" placeholder="Адрес получателя">
+        <div class="flex">
+            <input type="number" id="amount" placeholder="Сумма">
+            <input type="number" id="fee" placeholder="Комиссия" value="1000">
+        </div>
+        <button onclick="send()">Отправить</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const API = "http://localhost:8080/api";
+        
+        async function refresh() {
+            const addr = document.getElementById("addr").value;
+            try {
+                const r = await fetch(`${API}/balance/${addr}`);
+                const data = await r.json();
+                document.getElementById("balance").textContent = data.balance.toLocaleString();
+            } catch(e) {
+                document.getElementById("balance").textContent = "Ошибка подключения";
+                console.error(e);
+            }
+        }
+        
+        async function send() {
+            const status = document.getElementById("status");
+            status.innerHTML = "Отправка...";
+            
+            const tx = {
+                sender: document.getElementById("from").value,
+                recipient: document.getElementById("to").value,
+                amount: parseInt(document.getElementById("amount").value) || 0,
+                fee: parseInt(document.getElementById("fee").value) || 0,
+                signature: "dummy_sig_" + Date.now()
+            };
+            
+            if (!tx.recipient || tx.amount <= 0) {
+                status.innerHTML = '<div class="error">Укажите получателя и сумму</div>';
+                return;
+            }
+            
+            try {
+                const r = await fetch(`${API}/send`, {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(tx)
+                });
+                const data = await r.json();
+                
+                if(data.success) {
+                    status.innerHTML = '<div class="success">✓ Успешно! TX: ' + data.tx_hash.substring(0, 20) + '...</div>';
+                    refresh();
+                } else {
+                    status.innerHTML = '<div class="error">✗ Ошибка: ' + data.error + '</div>';
+                }
+            } catch(e) {
+                status.innerHTML = '<div class="error">✗ Ошибка сети: нода не запущена?</div>';
+                console.error(e);
+            }
+        }
+        
+        refresh();
+        setInterval(refresh, 10000);
+    </script>
+</body>
+</html>

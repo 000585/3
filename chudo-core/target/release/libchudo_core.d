@@ -1,0 +1,1 @@
+C:\Users\Lenovo\chudo-core\target\release\libchudo_core.rlib: C:\Users\Lenovo\chudo-core\src\block.rs C:\Users\Lenovo\chudo-core\src\crypto.rs C:\Users\Lenovo\chudo-core\src\dag.rs C:\Users\Lenovo\chudo-core\src\lib.rs C:\Users\Lenovo\chudo-core\src\mempool.rs C:\Users\Lenovo\chudo-core\src\state.rs C:\Users\Lenovo\chudo-core\src\transaction.rs

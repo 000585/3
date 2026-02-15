@@ -1,0 +1,50 @@
+syntax = "proto3";
+package chudo.p2p;
+
+service P2PNode {
+    rpc SubmitTransaction (SubmitTransactionRequest) returns (SubmitTransactionResponse);
+    rpc SubmitBlock (SubmitBlockRequest) returns (SubmitBlockResponse);
+    rpc SyncBlocks (SyncBlocksRequest) returns (SyncBlocksResponse);
+    rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+message SubmitTransactionRequest { 
+    bytes transaction_data = 1; 
+    string tx_hash = 2; 
+}
+
+message SubmitTransactionResponse { 
+    bool success = 1; 
+    string message = 2; 
+    string tx_hash = 3; 
+}
+
+message SubmitBlockRequest { 
+    bytes block_data = 1; 
+    string block_hash = 2; 
+    uint64 height = 3; 
+}
+
+message SubmitBlockResponse { 
+    bool success = 1; 
+    string message = 2; 
+    string block_hash = 3; 
+}
+
+message SyncBlocksRequest { 
+    uint64 from_height = 1; 
+    uint64 to_height = 2; 
+}
+
+message SyncBlocksResponse { 
+    repeated bytes blocks = 1; 
+    bool has_more = 2; 
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse { 
+    bool healthy = 1; 
+    string version = 2; 
+    uint64 block_height = 3; 
+}

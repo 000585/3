@@ -1,0 +1,8 @@
+/target
+**/*.rs.bk
+Cargo.lock
+*.log
+pkg/
+node_modules/
+dist/
+.env

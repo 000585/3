@@ -1,0 +1,9 @@
+﻿[package]
+name = "chudo-wallet"
+version = "0.7.0"
+edition = "2021"
+
+[dependencies]
+chudo-core = { path = "../chudo-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
