@@ -6,3 +6,13 @@ pkg/
 node_modules/
 dist/
 .env
+target/
+**/target/
+*.exe
+*.dll
+*.pdb
+*.rlib
+*.rmeta
+*.zip
+*.db
+snap.*

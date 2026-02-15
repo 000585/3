@@ -1,3 +1,0 @@
-cargo:rerun-if-changed=proto/chudo.proto
-cargo:rerun-if-changed=proto
-cargo:rerun-if-changed=proto/chudo.proto
