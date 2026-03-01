@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<title>Помощь и Контакты | ЦИК</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Помощь, частые вопросы и контактная информация Центральной избирательной комиссии."/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>"/>
+<style>
+:root{--bg:#0b1120;--bg-alt:#020617;--fg:#e5e7eb;--muted:#9ca3af;--accent:#1d4ed8;--accent-soft:#111827;--border:#1f2937;--card:#020617;--danger:#dc2626;--success:#16a34a;--warning:#f59e0b;--shadow:0 18px 40px rgba(15,23,42,.75)}
+[data-theme="light"]{--bg:#f3f4f6;--bg-alt:#fff;--fg:#111827;--accent-soft:#e5e7eb;--border:#d1d5db;--card:#fff;--shadow:0 18px 40px rgba(15,23,42,.15)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;transition:background-color .5s,color .5s,border-color .5s; display:flex; flex-direction:column; min-height:100vh;}
+a{text-decoration:none;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@keyframes holo{0%{background-position:0%}100%{background-position:200%}}
+.holo-text{background:linear-gradient(90deg,#00f260,#0575e6,#f200cb,#00f260);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:holo 3s linear infinite}
+
+/* --- БЧБ ШАПКА --- */
+.flag-header { position: sticky; top: 0; z-index: 1000; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.flag-stripe { width: 100%; }
+.stripe-white { background-color: #ffffff; }
+.stripe-red { background-color: #D22730; }
+.top-stripe { height: 12px; }
+.middle-stripe { height: 44px; position: relative; overflow: hidden; display: flex; align-items: center; }
+.header-marquee-text { display: inline-block; white-space: nowrap; font-size: 1.25rem; font-weight: 800; color: #ffffff; padding-left: 100%; animation: marquee 25s linear infinite; letter-spacing: 1px; }
+@keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
+.bottom-stripe { min-height: 60px; padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb; }
+.header-inner { max-width: 1120px; margin: 0 auto; padding: 0 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.nav-left-group { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.nav-logo { font-weight: 900; font-size: 1.6rem; letter-spacing: 1px; }
+.nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.nav-link { color: #111827 !important; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 6px; transition: 0.2s; }
+.nav-link:hover, .nav-link.active { background-color: #f3f4f6; color: #D22730 !important; }
+.nav-controls { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
+.lang-globe { position: relative; }
+.globe-btn, .theme-toggle { background: #ffffff; border: 2px solid #d1d5db; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: .3s; color: #111827; }
+.globe-btn:hover, .theme-toggle:hover { border-color: #D22730; transform: scale(1.1); }
+.theme-toggle { border-radius: 999px; width: auto; padding: 0 1rem; }
+.globe-flags { position: absolute; right: 0; top: 55px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: .5rem; display: none; grid-template-columns: repeat(3, 1fr); gap: .4rem; min-width: 280px; box-shadow: var(--shadow); z-index: 1001; }
+.globe-flags.show { display: grid; }
+.flag-item { display: flex; align-items: center; gap: 8px; padding: .5rem; border-radius: 8px; cursor: pointer; transition: .2s; font-size: .8rem; color: var(--fg); }
+.flag-item:hover, .flag-item.active { background: var(--accent-soft); color: var(--accent); }
+.fi { width: 1.2em; height: 1em; background-size: cover; border-radius: 2px; }
+
+/* --- КОНТЕНТ СТРАНИЦЫ ПОМОЩЬ --- */
+main { flex: 1; width: 100%; max-width: 1120px; margin: 0 auto; padding: 3rem 1rem; }
+.page-title { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; font-weight: 900; }
+.page-subtitle { text-align: center; color: var(--muted); margin-bottom: 3rem; font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+.help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+
+/* Карточка информации */
+.help-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow); transition: transform 0.3s, border-color 0.3s; }
+.help-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+.help-card h2 { color: var(--fg); margin-top: 0; margin-bottom: 1.5rem; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+.help-card p { color: var(--muted); line-height: 1.7; font-size: 0.95rem; margin-bottom: 1rem; }
+
+/* Контакты внутри карточки */
+.contact-box { background: rgba(29, 78, 216, 0.1); border: 1px solid var(--accent); padding: 1.5rem; border-radius: 8px; text-align: center; margin-top: 1rem; }
+.contact-box a { color: var(--accent); font-weight: bold; font-size: 1.2rem; display: inline-block; margin-top: 0.5rem; }
+.contact-label { display: block; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; }
+.contact-row { margin-bottom: 1rem; }
+.contact-row:last-child { margin-bottom: 0; }
+
+/* Блок FAQ (Аккордеон) */
+.faq-section { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+.faq-title { text-align: center; margin-top: 0; margin-bottom: 2rem; color: var(--fg); }
+.faq-item { border-bottom: 1px solid var(--border); padding: 1rem 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-question { font-weight: 700; color: var(--fg); font-size: 1.1rem; margin-bottom: 0.5rem; }
+.faq-answer { color: var(--muted); line-height: 1.6; font-size: 0.95rem; margin: 0; }
+
+/* Подвал */
+.site-footer{border-top:1px solid var(--border);background:var(--bg-alt);padding:2rem 1rem 3rem; margin-top: auto;}
+.footer-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.footer-block h3{margin-bottom:1rem;color:var(--fg);border-bottom:2px solid var(--accent);padding-bottom:.5rem}
+.footer-block li{margin-bottom:8px;color:var(--muted);list-style:none}
+.social-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;transition:.3s;color:#fff}
+.social-btn:hover{transform:scale(1.1);filter:brightness(1.15)}
+.social-icon{width:20px;height:20px;fill:currentColor}
+.social-yt{background:#FF0000}.social-tg{background:#229ED9}.social-fb{background:#1877F2}.social-x{background:#000;border:1px solid #333}.social-ig{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
+.social-tt{background:#000;border:1px solid #333}
+</style>
+</head>
+<body>
+
+<header class="flag-header">
+  <div class="flag-stripe stripe-white top-stripe"></div>
+  <div class="flag-stripe stripe-red middle-stripe">
+    <div class="header-marquee-text" data-i18n="marquee">ЦЕНТРАЛЬНАЯ ИЗБИРАТЕЛЬНАЯ КОМИССИЯ • ЦИК • ЗАЩИТА ПРАВ • СВОБОДА • БЕЗОПАСНОСТЬ И СПРАВЕДЛИВОСТЬ • </div>
+  </div>
+  <div class="flag-stripe stripe-white bottom-stripe">
+    <div class="header-inner">
+      <div class="nav-left-group">
+        <a href="../index.html" class="nav-logo holo-text">ЦИК</a>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link" data-i18n="nav_home">Главная</a>
+          <a href="about.html" class="nav-link" data-i18n="nav_about">О нас</a>
+          <a href="commission.html" class="nav-link" data-i18n="nav_commission">Состав</a>
+          <a href="elections.html" class="nav-link" data-i18n="nav_elections">Выборы</a>
+          <a href="news.html" class="nav-link" data-i18n="nav_news">Новости</a>
+          <a href="help.html" class="nav-link active" data-i18n="nav_help">Помощь</a>
+          <a href="chudo.html" class="nav-link" data-i18n="nav_chudo">CHUDO</a>
+          <a href="donate.html" class="nav-link" data-i18n="nav_donate" style="color:#D22730 !important; font-weight:700">❤️ Поддержать</a>
+          <a href="contact.html" class="nav-link" data-i18n="nav_contact">Контакты</a>
+        </nav>
+      </div>
+      <div class="nav-controls">
+        <div class="lang-globe">
+          <button class="globe-btn" id="globeBtn" type="button" aria-label="Выбрать язык">🌐</button>
+          <div class="globe-flags" id="globeFlags">
+            <a href="#" class="flag-item" data-lang="ru"><span class="fi fi-ru"></span> Русский</a>
+            <a href="#" class="flag-item" data-lang="be"><span style="display:inline-block;width:1.2em;height:0.8em;background:linear-gradient(to bottom,white 33%,red 33%,red 66%,white 66%);border-radius:2px;"></span> Беларуская</a>
+            <a href="#" class="flag-item" data-lang="en"><span class="fi fi-gb"></span> English</a>
+          </div>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему"><span id="themeIcon">☀️</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title holo-text" data-i18n="help_title">Помощь и Контакты</h1>
+  <p class="page-subtitle" data-i18n="help_subtitle">Здесь вы найдете ответы на основные вопросы и способы связи с Центральной избирательной комиссией.</p>
+
+  <div class="help-grid">
+    <div class="help-card">
+      <h2 data-i18n="help_info_title">ℹ️ Информация для избирателей</h2>
+      <p data-i18n="help_info_p1">Наша главная задача — обеспечить абсолютную прозрачность и безопасность голосования. Мы работаем для того, чтобы каждый голос был учтен и защищен.</p>
+      <p data-i18n="help_info_p2">Вся официальная информация, касающаяся процесса выборов, требований к кандидатам и дат голосования, публикуется на странице <strong>Выборы</strong> и в разделе <strong>Новости</strong>.</p>
+      <p data-i18n="help_info_p3">Мы настоятельно рекомендуем следить за прямыми эфирами заседаний комиссии на нашем официальном YouTube-канале.</p>
+    </div>
+
+    <div class="help-card">
+      <h2 data-i18n="help_contact_title">📞 Связь с Комиссией</h2>
+      <p data-i18n="help_contact_p">Если у вас возникли дополнительные вопросы, предложения или официальные жалобы, вы можете направить их нам напрямую.</p>
+      
+      <div class="contact-box">
+        <div class="contact-row">
+          <span class="contact-label" data-i18n="label_email">Официальная почта</span>
+          <a href="mailto:yury@chudzinovich.de">yury@chudzinovich.de</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label" data-i18n="label_phone">Телефон для связи</span>
+          <a href="tel:+48795972990">+48 795 972 990</a>
+        </div>
+        <div class="contact-row" style="margin-top: 15px;">
+          <span class="contact-label" data-i18n="label_address">Адрес офиса</span>
+          <span style="color: var(--fg); font-weight: bold;">Польша, Варшава, ul. Lokcowa 12</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2 class="faq-title holo-text" data-i18n="faq_title">База знаний</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question" data-i18n="faq_q1">Процедура выдвижения кандидатов</div>
+      <p class="faq-answer" data-i18n="faq_a1">Подача документов от избирательных субъектов осуществляется в период с 10 по 31 марта 2026 года. Каждый кандидат обязан подать декларацию о доходах за последние 5 лет и пройти проверку на полиграфе.</p>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question" data-i18n="faq_q2">Даты и технология проведения голосования</div>
+      <p class="faq-answer" data-i18n="faq_a2">Основной этап выборов назначен на 11–17 мая 2026 года. Голосование будет проходить исключительно на защищенной цифровой платформе с использованием технологии блокчейн (проект CHUDO). Данные будут надежно зашифрованы.</p>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question" data-i18n="faq_q3">Способы поддержки Избирательной комиссии</div>
+      <p class="faq-answer" data-i18n="faq_a3">Вы можете поддержать нашу работу финансово. Для этого перейдите в раздел «Поддержать», где указаны официальные банковские реквизиты и криптокошельки. Ваша помощь обеспечивает независимость нашей деятельности.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-block">
+      <h3 class="holo-text" data-i18n="footer_contact">Контакты ЦИК</h3>
+      <ul>
+        <li><strong data-i18n="footer_address">Адрес:</strong> Польша, Варшава, ul. Lokcowa 12</li>
+        <li><strong>Email:</strong> <a href="mailto:yury@chudzinovich.de">yury@chudzinovich.de</a></li>
+        <li><strong data-i18n="footer_phone">Телефон:</strong> <a href="tel:+48795972990">+48 795 972 990</a></li>
+      </ul>
+    </div>
+    <div class="footer-block">
+      <h3 class="holo-text" data-i18n="footer_social">Соцсети</h3>
+      <div class="social-grid">
+        <a href="https://www.youtube.com/channel/UCTXAwovvaec4w9ztbggWMEQ" target="_blank" class="social-btn social-yt"><svg class="social-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://t.me/+48795972990" target="_blank" class="social-btn social-tg"><svg class="social-icon" viewBox="0 0 24 24"><path d="M11.944 0C5.347 0 0 5.347 0 11.944c0 6.597 5.347 11.944 11.944 11.944 6.597 0 11.944-5.347 11.944-11.944C23.888 5.347 18.541 0 11.944 0zm5.204 8.12l-1.764 8.312c-.133.593-.483.738-.982.458l-2.686-1.98-1.296 1.246c-.144.144-.264.264-.54.264l.192-2.73 4.968-4.488c.216-.192-.048-.3-.336-.108L8.568 12.44 5.916 11.61c-.576-.18-.588-.576.12-.852l10.38-4.008c.48-.18.9.108.732.372z"/></svg></a>
+        <a href="https://www.facebook.com/share/1bJi1GCA85/" target="_blank" class="social-btn social-fb"><svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://x.com/CHUDZINOVICH1" target="_blank" class="social-btn social-x"><svg class="social-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/chudzinovichyury" target="_blank" class="social-btn social-ig"><svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949 0-3.259-.014-3.667-.072-4.947-.072-4.358-2.618-6.78-6.98-6.98C15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://tiktok.com/@chudzinovich" target="_blank" class="social-btn social-tt"><svg class="social-icon" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:2rem;color:var(--muted);font-size:.8rem">© 2026 <span data-i18n="footer_org">Центральная избирательная комиссия</span></p>
+</footer>
+
+<script>
+const translations = {
+  ru: {
+    marquee: "ЦЕНТРАЛЬНАЯ ИЗБИРАТЕЛЬНАЯ КОМИССИЯ • ЦИК • ЗАЩИТА ПРАВ • СВОБОДА • БЕЗОПАСНОСТЬ И СПРАВЕДЛИВОСТЬ • ",
+    nav_home: "Главная", nav_about: "О нас", nav_commission: "Состав", nav_elections: "Выборы", nav_news: "Новости", nav_help: "Помощь", nav_donate: "❤️ Поддержать", nav_chudo: "CHUDO", nav_contact: "Контакты",
+    
+    help_title: "Помощь и Контакты",
+    help_subtitle: "Здесь вы найдете ответы на основные вопросы и способы связи с Центральной избирательной комиссией.",
+    
+    help_info_title: "ℹ️ Информация для избирателей",
+    help_info_p1: "Наша главная задача — обеспечить абсолютную прозрачность и безопасность голосования. Мы работаем для того, чтобы каждый голос был учтен и защищен.",
+    help_info_p2: "Вся официальная информация, касающаяся процесса выборов, требований к кандидатам и дат голосования, публикуется на странице Выборы и в разделе Новости.",
+    help_info_p3: "Мы настоятельно рекомендуем следить за прямыми эфирами заседаний комиссии на нашем официальном YouTube-канале.",
+    
+    help_contact_title: "📞 Связь с Комиссией",
+    help_contact_p: "Если у вас возникли дополнительные вопросы, предложения или официальные жалобы, вы можете направить их нам напрямую.",
+    label_email: "Официальная почта",
+    label_phone: "Телефон для связи",
+    label_address: "Адрес офиса",
+    
+    faq_title: "База знаний",
+    faq_q1: "Процедура выдвижения кандидатов",
+    faq_a1: "Подача документов от избирательных субъектов осуществляется в период с 10 по 31 марта 2026 года. Каждый кандидат обязан подать декларацию о доходах за последние 5 лет и пройти проверку на полиграфе.",
+    faq_q2: "Даты и технология проведения голосования",
+    faq_a2: "Основной этап выборов назначен на 11–17 мая 2026 года. Голосование будет проходить исключительно на защищенной цифровой платформе с использованием технологии блокчейн (проект CHUDO). Данные будут надежно зашифрованы.",
+    faq_q3: "Способы поддержки Избирательной комиссии",
+    faq_a3: "Вы можете поддержать нашу работу финансово. Для этого перейдите в раздел «Поддержать», где указаны официальные банковские реквизиты и криптокошельки. Ваша помощь обеспечивает независимость нашей деятельности.",
+
+    footer_contact: "Контакты ЦИК", footer_address: "Адрес:", footer_phone: "Телефон:", footer_social: "Соцсети", footer_org: "Центральная избирательная комиссия"
+  },
+  be: {
+    marquee: "ЦЭНТРАЛЬНАЯ ВЫБАРЧАЯ КАМІСІЯ • ЦВК • АБАРОНА ПРАВОЎ • СВАБОДА • БЯСПЕКА І СПРАВЯДЛІВАСЦЬ • ",
+    nav_home: "Галоўная", nav_about: "Пра нас", nav_commission: "Склад", nav_elections: "Выбары", nav_news: "Навіны", nav_help: "Дапамога", nav_donate: "❤️ Падтрымаць", nav_chudo: "CHUDO", nav_contact: "Кантакты",
+    
+    help_title: "Дапамога і Кантакты",
+    help_subtitle: "Тут вы знойдзеце адказы на асноўныя пытанні і спосабы сувязі з Цэнтральнай выбарчай камісіяй.",
+    
+    help_info_title: "ℹ️ Інфармацыя для выбаршчыкаў",
+    help_info_p1: "Наша галоўная задача — забяспечыць абсалютную празрыстасць і бяспеку галасавання. Мы працуем для таго, каб кожны голас быў улічаны і абаронены.",
+    help_info_p2: "Уся афіцыйная інфармацыя, якая датычыцца працэсу выбараў, патрабаванняў да кандыдатаў і дат галасавання, публікуецца на старонцы Выбары і ў раздзеле Навіны.",
+    help_info_p3: "Мы настойліва рэкамендуем сачыць за прамымі эфірамі пасяджэнняў камісіі на нашым афіцыйным YouTube-канале.",
+    
+    help_contact_title: "📞 Сувязь з Камісіяй",
+    help_contact_p: "Калі ў вас узніклі дадатковыя пытанні, прапановы або афіцыйныя скаргі, вы можаце накіраваць іх нам напрамую.",
+    label_email: "Афіцыйная пошта",
+    label_phone: "Тэлефон для сувязі",
+    label_address: "Адрас офіса",
+    
+    faq_title: "База ведаў",
+    faq_q1: "Працэдура вылучэння кандыдатаў",
+    faq_a1: "Падача дакументаў ад выбарчых суб'ектаў ажыццяўляецца ў перыяд з 10 па 31 сакавіка 2026 года. Кожны кандыдат абавязаны падаць дэкларацыю аб даходах за апошнія 5 гадоў і прайсці праверку на паліграфе.",
+    faq_q2: "Даты і тэхналогія правядзення галасавання",
+    faq_a2: "Асноўны этап выбараў прызначаны на 11–17 мая 2026 года. Галасаванне будзе праходзіць выключна на абароненай лічбавай платформе з выкарыстаннем тэхналогіі блокчэйн (праект CHUDO). Даныя будуць надзейна зашыфраваны.",
+    faq_q3: "Спосабы падтрымкі Выбарчай камісіі",
+    faq_a3: "Вы можаце падтрымаць нашу працу фінансава. Для гэтага перайдзіце ў раздзел «Падтрымаць», дзе ўказаны афіцыйныя банкаўскія рэквізіты і крыптакашалькі. Ваша дапамога забяспечвае незалежнасць нашай дзейнасці.",
+
+    footer_contact: "Кантакты ЦВК", footer_address: "Адрас:", footer_phone: "Тэлефон:", footer_social: "Сацыяльныя сеткі", footer_org: "Цэнтральная выбарчая камісія"
+  },
+  en: {
+    marquee: "CENTRAL ELECTORAL COMMISSION • CEC • RIGHTS PROTECTION • FREEDOM • SECURITY AND JUSTICE • ",
+    nav_home: "Home", nav_about: "About", nav_commission: "Members", nav_elections: "Elections", nav_news: "News", nav_help: "Help", nav_donate: "❤️ Donate", nav_chudo: "CHUDO", nav_contact: "Contact",
+    
+    help_title: "Help and Contacts",
+    help_subtitle: "Here you will find answers to the main queries and ways to contact the Central Election Commission.",
+    
+    help_info_title: "ℹ️ Information for Voters",
+    help_info_p1: "Our main task is to ensure absolute transparency and security of voting. We work so that every vote is counted and protected.",
+    help_info_p2: "All official information regarding the election process, candidate requirements, and voting dates is published on the Elections page and in the News section.",
+    help_info_p3: "We strongly recommend following the live broadcasts of the commission meetings on our official YouTube channel.",
+    
+    help_contact_title: "📞 Contact the Commission",
+    help_contact_p: "If you have any additional questions, suggestions, or official complaints, you can send them directly to us.",
+    label_email: "Official Email",
+    label_phone: "Contact Phone",
+    label_address: "Office Address",
+    
+    faq_title: "Knowledge Base",
+    faq_q1: "Candidate Nomination Procedure",
+    faq_a1: "The submission of documents from electoral subjects takes place from March 10 to 31, 2026. Each candidate must submit an income declaration for the last 5 years and pass a polygraph test.",
+    faq_q2: "Dates and Technology of Voting",
+    faq_a2: "The main stage of the elections is scheduled for May 11–17, 2026. Voting will take place exclusively on a secure digital platform using blockchain technology (CHUDO project). Data will be securely encrypted.",
+    faq_q3: "Ways to Support the Election Commission",
+    faq_a3: "You can support our work financially. To do this, go to the 'Donate' section, which lists official bank details and crypto wallets. Your help ensures the independence of our activities.",
+
+    footer_contact: "CEC Contacts", footer_address: "Address:", footer_phone: "Phone:", footer_social: "Social Networks", footer_org: "Central Election Commission"
+  }
+};
+
+function applyLang(lang) {
+  if (!translations[lang]) lang = 'ru';
+  document.documentElement.lang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      if (t[key].includes('<')) el.innerHTML = t[key];
+      else el.textContent = t[key];
+    }
+  });
+  document.querySelectorAll('.flag-item').forEach(f => f.classList.remove('active'));
+  const activeFlag = document.querySelector(`.flag-item[data-lang="${lang}"]`);
+  if (activeFlag) activeFlag.classList.add('active');
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  let savedLang = 'ru';
+  try { savedLang = localStorage.getItem('lang') || 'ru'; } catch(e) {}
+  applyLang(savedLang);
+
+  document.getElementById('globeBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('globeFlags').classList.toggle('show');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.lang-globe')) document.getElementById('globeFlags').classList.remove('show');
+  });
+
+  document.querySelectorAll('.flag-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      applyLang(item.getAttribute('data-lang'));
+      document.getElementById('globeFlags').classList.remove('show');
+    });
+  });
+
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    const html = document.documentElement;
+    const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    try { localStorage.setItem('theme', newTheme); } catch(e) {}
+  });
+
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem('theme'); } catch(e) {}
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  }
+});
+</script>
+</body>
+</html>

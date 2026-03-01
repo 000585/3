@@ -1,25 +1,18 @@
 [package]
 name = "chudo-node"
-version = "0.9.1"
+version = "0.9.2"
 edition = "2021"
 
 [dependencies]
 chudo-core = { path = "../chudo-core" }
 chudo-messenger = { path = "../chudo-messenger" }
-tokio = { version = "1", features = ["full"] }
+tonic = "0.9"
+prost = "0.11"
+tokio = { version = "1.0", features = ["full"] }
 tokio-stream = "0.1"
-async-stream = "0.3"
-axum = "0.7"
-tonic = "0.12"
-prost = "0.13"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-uuid = { version = "1.0", features = ["v4"] }
-anyhow = "1.0"
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-hex = "0.4.3"
+hex = "0.4"
+futures-core = "0.3"
+futures-util = "0.3"
 
 [build-dependencies]
-tonic-build = "0.12"
-prost = "0.13"
+tonic-build = "0.9"

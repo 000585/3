@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<title>Центральная избирательная комиссия | ЦИК</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Официальный сайт Центральной избирательной комиссии"/>
+<style>
+:root{--bg:#0b1120;--bg-alt:#151e32;--fg:#e5e7eb;--fg-muted:#94a3b8;--accent:#1d4ed8;--accent-hover:#2563eb;--border:rgba(148,163,184,0.2);--radius:12px;--shadow:0 4px 6px -1px rgba(0,0,0,0.3)}
+[data-theme=light]{--bg:#f8fafc;--bg-alt:#f1f5f9;--fg:#0f172a;--fg-muted:#64748b;--accent:#1d4ed8;--border:rgba(148,163,184,0.3)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;transition:background .3s,color .3s}
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+.site-header{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:1rem 0;position:sticky;top:0;z-index:100}
+.header-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.main-nav{display:flex;gap:2rem;list-style:none}
+.main-nav a{color:var(--fg-muted);text-decoration:none;font-weight:500;transition:color .2s}
+.main-nav a:hover{color:var(--accent)}
+.header-controls{display:flex;gap:.5rem;align-items:center}
+.lang-btn,.theme-toggle{background:var(--bg);border:1px solid var(--border);color:var(--fg);padding:.5rem 1rem;border-radius:var(--radius);cursor:pointer;font-size:.9rem;transition:all .2s}
+.lang-btn:hover,.theme-toggle:hover{border-color:var(--accent)}
+.lang-dropdown{display:none;position:absolute;top:100%;right:0;background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem;min-width:120px}
+.lang-dropdown.show{display:block}
+.lang-option{display:flex;align-items:center;gap:.5rem;padding:.5rem;cursor:pointer;border-radius:6px}
+.lang-option:hover{background:var(--bg)}
+.hero{padding:4rem 0;text-align:center;background:linear-gradient(135deg,var(--bg) 0%,var(--bg-alt) 100%);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#fff 33%,#dc2626 33%,#dc2626 66%,#fff 66%)}
+.hero h1{font-size:3rem;margin-bottom:1rem;font-weight:800}
+.holo-text{background:linear-gradient(90deg,#fff,#dc2626,#fff);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.hero p{font-size:1.25rem;color:var(--fg-muted);max-width:600px;margin:0 auto 2rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;padding:1rem 2rem;border-radius:var(--radius);text-decoration:none;font-weight:600;transition:all .2s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--fg);padding:1rem 2rem;border-radius:var(--radius);text-decoration:none;font-weight:600;border:2px solid var(--border);transition:all .2s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.card-scroll{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;padding:4rem 0}
+.info-card{background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+.info-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.tilt-card{transform-style:preserve-3d;transition:transform .3s}
+.photo-card{min-height:500px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;padding:0;overflow:hidden}
+.photo-card-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.8;transition:opacity .3s}
+.photo-card:hover .photo-card-bg{opacity:1}
+.photo-card-content{position:relative;z-index:2;padding:2rem;background:linear-gradient(to top,rgba(11,17,32,.95),transparent)}
+.photo-card h3{font-size:1.5rem;margin-bottom:.5rem}
+.photo-card p{color:var(--fg-muted)}
+.marquee-container{overflow:hidden;background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0}
+.marquee{display:flex;animation:marquee 20s linear infinite;white-space:nowrap}
+.marquee span{margin-right:4rem;color:var(--fg-muted);font-weight:500}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.site-footer{border-top:1px solid var(--border);background:var(--bg-alt);padding:3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.footer-section h3{color:var(--accent);margin-bottom:1rem}
+.footer-section ul{list-style:none}
+.footer-section li{margin-bottom:.5rem}
+.footer-section a{color:var(--fg-muted);text-decoration:none;transition:color .2s}
+.footer-section a:hover{color:var(--accent)}
+.support-float{position:fixed;bottom:2rem;right:2rem;z-index:1000}
+.support-btn{background:#dc2626;color:#fff;padding:1rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600;box-shadow:0 4px 12px rgba(220,38,38,.4);animation:pulse 2s infinite;display:flex;align-items:center;gap:.5rem}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.coin-3d{width:60px;height:60px;position:relative;transform-style:preserve-3d;animation:spin 4s linear infinite;margin:0 auto 1rem}
+.coin-face{position:absolute;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#ffed4e);display:flex;align-items:center;justify-content:center;font-weight:bold;color:#b8860b;border:3px solid #daa520;backface-visibility:hidden}
+.coin-front{transform:translateZ(5px)}
+.coin-back{transform:rotateY(180deg) translateZ(5px)}
+.coin-edge{position:absolute;width:60px;height:10px;background:linear-gradient(90deg,#daa520,#ffd700,#daa520);transform:rotateX(90deg) translateZ(30px)}
+@keyframes spin{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+@media(max-width:768px){.hero h1{font-size:2rem}.main-nav{gap:1rem;font-size:.9rem}.card-scroll{grid-template-columns:1rem}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-content">
+    <div class="logo">ЦИК</div>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="index.html" data-i18n="nav_home">Главная</a></li>
+        <li><a href="pages/about.html" data-i18n="nav_about">О нас</a></li>
+        <li><a href="pages/elections.html" data-i18n="nav_elections">Выборы</a></li>
+        <li><a href="pages/help.html" data-i18n="nav_help">Помощь</a></li>
+        <li><a href="pages/chudo.html" data-i18n="nav_chudo">CHUDO</a></li>
+        <li><a href="pages/contact.html" data-i18n="nav_contact">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Переключить тему">🌓</button>
+      <button class="lang-btn" onclick="toggleLangMenu()" aria-label="Выбрать язык">🌐</button>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-option" onclick="setLang('ru')">🇷🇺 Русский</div>
+        <div class="lang-option" onclick="setLang('be')">🇧🇾 Беларуская</div>
+        <div class="lang-option" onclick="setLang('en')">🇬🇧 English</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="coin-3d">
+      <div class="coin-face coin-front">C</div>
+      <div class="coin-face coin-back">H</div>
+      <div class="coin-edge"></div>
+    </div>
+    <h1 class="holo-text" data-i18n="hero_title">Центральная избирательная комиссия</h1>
+    <p data-i18n="hero_subtitle">Независимое наблюдение за выборами. Поддержка политзаключённых. Свобода для Беларуси.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="pages/elections.html" class="btn-primary" data-i18n="btn_elections">Наблюдение за выборами</a>
+      <a href="pages/help.html" class="btn-secondary" data-i18n="btn_help">Поддержать</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-container">
+  <div class="marquee">
+    <span>СВОБОДА ДЛЯ БЕЛАРУСИ</span>
+    <span>СВОБОДА ДЛЯ БЕЛАРУСИ</span>
+    <span>СВОБОДА ДЛЯ БЕЛАРУСИ</span>
+    <span>СВОБОДА ДЛЯ БЕЛАРУСИ</span>
+    <span>СВОБОДА ДЛЯ БЕЛАРУСИ</span>
+    <span>СВОБОДА ДЛЯ БЕЛАРУСИ</span>
+  </div>
+</div>
+
+<main class="container card-scroll" id="main">
+  <article class="info-card tilt-card photo-card">
+    <img src="images/1000023339.jpg" alt="Юрий Чудинович" class="photo-card-bg" loading="lazy" width="380" height="500">
+    <div class="photo-card-content">
+      <h3 class="holo-text" data-i18n="card_photo_title">Центральная избирательная комиссия</h3>
+      <p data-i18n="card_photo_text">Независимая платформа для защиты демократии и прав человека</p>
+    </div>
+  </article>
+  
+  <article class="info-card tilt-card">
+    <h3 data-i18n="card_about_title">О нас</h3>
+    <p data-i18n="card_about_text">Мы объединяем независимых наблюдателей, правозащитников и активистов для обеспечения прозрачности выборов и поддержки политических заключённых.</p>
+    <a href="pages/about.html" class="btn-primary" style="margin-top:1rem" data-i18n="btn_more">Подробнее</a>
+  </article>
+  
+  <article class="info-card tilt-card">
+    <h3 data-i18n="card_elections_title">Наблюдение</h3>
+    <p data-i18n="card_elections_text">Система регистрации наблюдателей, координация действий на избирательных участках, фиксация нарушений.</p>
+    <a href="pages/elections.html" class="btn-primary" style="margin-top:1rem" data-i18n="btn_register">Стать наблюдателем</a>
+  </article>
+  
+  <article class="info-card tilt-card">
+    <h3 data-i18n="card_help_title">Помощь</h3>
+    <p data-i18n="card_help_text">Финансовая поддержка политзаключённым и их семьям. Реквизиты для переводов.</p>
+    <a href="pages/help.html" class="btn-primary" style="margin-top:1rem" data-i18n="btn_donate">Поддержать</a>
+  </article>
+  
+  <article class="info-card tilt-card">
+    <h3 data-i18n="card_chudo_title">CHUDO</h3>
+    <p data-i18n="card_chudo_text">Криптовалюта для поддержки политзаключённых. Токен стандарта KRC-20 в сети Kaspa.</p>
+    <a href="pages/chudo.html" class="btn-primary" style="margin-top:1rem" data-i18n="btn_chudo">Узнать больше</a>
+  </article>
+  
+  <article class="info-card tilt-card">
+    <h3 data-i18n="card_contact_title">Контакты</h3>
+    <p data-i18n="card_contact_text">Свяжитесь с нами: yury@chudzinovich.de<br>Телефон: +48 795 972 990<br>Адрес: ul. Lokcowa 12, 04-186 Warszawa</p>
+    <a href="pages/contact.html" class="btn-primary" style="margin-top:1rem" data-i18n="btn_contact">Написать</a>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <div class="footer-section">
+      <h3 class="holo-text">ЦИК</h3>
+      <p data-i18n="footer_desc">Центральная избирательная комиссия — независимая платформа для защиты демократии в Беларуси.</p>
+    </div>
+    <div class="footer-section">
+      <h3 data-i18n="footer_links">Ссылки</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/channel/UCTXAwovvaec4w9ztbggWMEQ" target="_blank">YouTube</a></li>
+        <li><a href="https://t.me/+48795972990" target="_blank">Telegram</a></li>
+        <li><a href="https://www.facebook.com/share/1bJi1GCA85/" target="_blank">Facebook</a></li>
+        <li><a href="https://x.com/CHUDZINOVICH1" target="_blank">X/Twitter</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3 data-i18n="footer_contact">Контакты</h3>
+      <ul>
+        <li>Email: <a href="mailto:yury@chudzinovich.de">yury@chudzinovich.de</a></li>
+        <li>Tel: <a href="tel:+48795972990">+48 795 972 990</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<div class="support-float">
+  <a href="pages/help.html" class="support-btn" data-i18n="btn_support">❤️ Поддержать сейчас</a>
+</div>
+
+<script>
+const i18n={
+ru:{
+nav_home:"Главная",nav_about:"О нас",nav_elections:"Выборы",nav_help:"Помощь",nav_chudo:"CHUDO",nav_contact:"Контакты",
+hero_title:"Центральная избирательная комиссия",hero_subtitle:"Независимое наблюдение за выборами. Поддержка политзаключённых. Свобода для Беларуси.",
+btn_elections:"Наблюдение за выборами",btn_help:"Поддержать",btn_more:"Подробнее",btn_register:"Стать наблюдателем",btn_donate:"Поддержать",btn_chudo:"Узнать больше",btn_contact:"Написать",btn_support:"Поддержать сейчас",
+card_photo_title:"Центральная избирательная комиссия",card_photo_text:"Независимая платформа для защиты демократии и прав человека",
+card_about_title:"О нас",card_about_text:"Мы объединяем независимых наблюдателей, правозащитников и активистов для обеспечения прозрачности выборов и поддержки политических заключённых.",
+card_elections_title:"Наблюдение",card_elections_text:"Система регистрации наблюдателей, координация действий на избирательных участках, фиксация нарушений.",
+card_help_title:"Помощь",card_help_text:"Финансовая поддержка политзаключённым и их семьям. Реквизиты для переводов.",
+card_chudo_title:"CHUDO",card_chudo_text:"Криптовалюта для поддержки политзаключённых. Токен стандарта KRC-20 в сети Kaspa.",
+card_contact_title:"Контакты",card_contact_text:"Свяжитесь с нами: yury@chudzinovich.de<br>Телефон: +48 795 972 990<br>Адрес: ul. Lokcowa 12, 04-186 Warszawa",
+footer_desc:"Центральная избирательная комиссия — независимая платформа для защиты демократии в Беларуси.",footer_links:"Ссылки",footer_contact:"Контакты"
+},
+be:{
+nav_home:"Галоўная",nav_about:"Пра нас",nav_elections:"Выбары",nav_help:"Дапамога",nav_chudo:"CHUDO",nav_contact:"Кантакты",
+hero_title:"Цэнтральная выбарчая камісія",hero_subtitle:"Незалежнае назіранне за выбарамі. Падтрымка палітычных зняволеных. Свабода для Беларусі.",
+btn_elections:"Назіранне за выбарамі",btn_help:"Падтрымаць",btn_more:"Падрабязней",btn_register:"Стаць назіральнікам",btn_donate:"Падтрымаць",btn_chudo:"Даведацца больш",btn_contact:"Напісаць",btn_support:"Падтрымаць зараз",
+card_photo_title:"Цэнтральная выбарчая камісія",card_photo_text:"Незалежная платформа для абароны дэмакратыі і правоў чалавека",
+card_about_title:"Пра нас",card_about_text:"Мы аб'ядноўваем незалежных назіральнікаў, праваабаронцаў і актывістаў для забеспячэння празрыстасці выбараў і падтрымкі палітычных зняволеных.",
+card_elections_title:"Назіранне",card_elections_text:"Сістэма рэгістрацыі назіральнікаў, каардынацыя дзеянняў на выбарчых участках, фіксацыя парушэнняў.",
+card_help_title:"Дапамога",card_help_text:"Фінансавая падтрымка палітычным зняволеным і іх сем'ям. Рэквізіты для пераводаў.",
+card_chudo_title:"CHUDO",card_chudo_text:"Крыптавалюта для падтрымкі палітычных зняволеных. Токен стандарту KRC-20 у сетцы Kaspa.",
+card_contact_title:"Кантакты",card_contact_text:"Звяжыцеся з намі: yury@chudzinovich.de<br>Тэлефон: +48 795 972 990<br>Адрас: ul. Lokcowa 12, 04-186 Warszawa",
+footer_desc:"Цэнтральная выбарчая камісія — незалежная платформа для абароны дэмакратыі ў Беларусі.",footer_links:"Спасылкі",footer_contact:"Кантакты"
+},
+en:{
+nav_home:"Home",nav_about:"About",nav_elections:"Elections",nav_help:"Help",nav_chudo:"CHUDO",nav_contact:"Contact",
+hero_title:"Central Election Commission",hero_subtitle:"Independent election observation. Support for political prisoners. Freedom for Belarus.",
+btn_elections:"Election Observation",btn_help:"Support",btn_more:"Learn More",btn_register:"Become Observer",btn_donate:"Donate",btn_chudo:"Learn More",btn_contact:"Contact Us",btn_support:"Support Now",
+card_photo_title:"Central Election Commission",card_photo_text:"Independent platform for defending democracy and human rights",
+card_about_title:"About Us",card_about_text:"We unite independent observers, human rights defenders and activists to ensure election transparency and support political prisoners.",
+card_elections_title:"Observation",card_elections_text:"Observer registration system, coordination at polling stations, violation documentation.",
+card_help_title:"Help",card_help_text:"Financial support for political prisoners and their families. Transfer details.",
+card_chudo_title:"CHUDO",card_chudo_text:"Cryptocurrency to support political prisoners. KRC-20 token on Kaspa network.",
+card_contact_title:"Contact",card_contact_text:"Contact us: yury@chudzinovich.de<br>Phone: +48 795 972 990<br>Address: ul. Lokcowa 12, 04-186 Warszawa",
+footer_desc:"Central Election Commission — independent platform for defending democracy in Belarus.",footer_links:"Links",footer_contact:"Contact"
+}
+};
+let currentLang=localStorage.getItem('lang')||'ru';
+function setLang(lang){currentLang=lang;localStorage.setItem('lang',lang);document.documentElement.lang=lang;updateTexts();document.getElementById('langDropdown').classList.remove('show');if(lang==='be'){document.documentElement.style.setProperty('--accent','#dc2626')}}
+function updateTexts(){document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(i18n[currentLang]&&i18n[currentLang][key]){if(el.innerHTML!==i18n[currentLang][key])el.innerHTML=i18n[currentLang][key]}})}
+function toggleLangMenu(){document.getElementById('langDropdown').classList.toggle('show')}
+function toggleTheme(){const html=document.documentElement;const current=html.getAttribute('data-theme');const next=current==='dark'?'light':'dark';html.setAttribute('data-theme',next);localStorage.setItem('theme',next)}
+document.addEventListener('click',e=>{if(!e.target.closest('.header-controls'))document.getElementById('langDropdown').classList.remove('show')});
+document.addEventListener('DOMContentLoaded',()=>{const savedTheme=localStorage.getItem('theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);setLang(currentLang)});
+document.querySelectorAll('.tilt-card').forEach(card=>{card.addEventListener('mousemove',e=>{const rect=card.getBoundingClientRect();const x=e.clientX-rect.left;const y=e.clientY-rect.top;const centerX=rect.width/2;const centerY=rect.height/2;const rotateX=(y-centerY)/20;const rotateY=(centerX-x)/20;card.style.transform=`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`});card.addEventListener('mouseleave',()=>{card.style.transform='perspective(1000px) rotateX(0) rotateY(0)'})});
+</script>
+</body>
+</html>

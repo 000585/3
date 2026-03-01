@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<title>Новости и Документы | ЦИК</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Официальные новости, обращения и регламенты Центральной избирательной комиссии."/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>"/>
+<style>
+:root{--bg:#0b1120;--bg-alt:#020617;--fg:#e5e7eb;--muted:#9ca3af;--accent:#1d4ed8;--accent-soft:#111827;--border:#1f2937;--card:#020617;--danger:#dc2626;--success:#16a34a;--warning:#f59e0b;--shadow:0 18px 40px rgba(15,23,42,.75)}
+[data-theme="light"]{--bg:#f3f4f6;--bg-alt:#fff;--fg:#111827;--accent-soft:#e5e7eb;--border:#d1d5db;--card:#fff;--shadow:0 18px 40px rgba(15,23,42,.15)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;transition:background-color .5s,color .5s,border-color .5s; display:flex; flex-direction:column; min-height:100vh;}
+a{text-decoration:none;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@keyframes holo{0%{background-position:0%}100%{background-position:200%}}
+.holo-text{background:linear-gradient(90deg,#00f260,#0575e6,#f200cb,#00f260);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:holo 3s linear infinite}
+
+/* --- БЧБ ШАПКА --- */
+.flag-header { position: sticky; top: 0; z-index: 1000; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.flag-stripe { width: 100%; }
+.stripe-white { background-color: #ffffff; }
+.stripe-red { background-color: #D22730; }
+.top-stripe { height: 12px; }
+.middle-stripe { height: 44px; position: relative; overflow: hidden; display: flex; align-items: center; }
+.header-marquee-text { display: inline-block; white-space: nowrap; font-size: 1.25rem; font-weight: 800; color: #ffffff; padding-left: 100%; animation: marquee 25s linear infinite; letter-spacing: 1px; }
+@keyframes marquee{0%{transform:translate(0,0)}100%{transform:translate(-100%,0)}}
+.bottom-stripe { min-height: 60px; padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb; }
+.header-inner { max-width: 1120px; margin: 0 auto; padding: 0 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.nav-left-group { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.nav-logo { font-weight: 900; font-size: 1.6rem; letter-spacing: 1px; }
+.nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.nav-link { color: #111827 !important; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 6px; transition: 0.2s; }
+.nav-link:hover, .nav-link.active { background-color: #f3f4f6; color: #D22730 !important; }
+.nav-controls { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
+.lang-globe { position: relative; }
+.globe-btn, .theme-toggle { background: #ffffff; border: 2px solid #d1d5db; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: .3s; color: #111827; }
+.globe-btn:hover, .theme-toggle:hover { border-color: #D22730; transform: scale(1.1); }
+.theme-toggle { border-radius: 999px; width: auto; padding: 0 1rem; }
+.globe-flags { position: absolute; right: 0; top: 55px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: .5rem; display: none; grid-template-columns: repeat(3, 1fr); gap: .4rem; min-width: 280px; box-shadow: var(--shadow); z-index: 1001; }
+.globe-flags.show { display: grid; }
+.flag-item { display: flex; align-items: center; gap: 8px; padding: .5rem; border-radius: 8px; cursor: pointer; transition: .2s; font-size: .8rem; color: var(--fg); }
+.flag-item:hover, .flag-item.active { background: var(--accent-soft); color: var(--accent); }
+.fi { width: 1.2em; height: 1em; background-size: cover; border-radius: 2px; }
+
+/* --- СТРАНИЦА НОВОСТЕЙ --- */
+main { flex: 1; width: 100%; max-width: 950px; margin: 0 auto; padding: 3rem 1rem; }
+.page-title { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; font-weight: 900; }
+.doc-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 3rem; justify-content: center; }
+.doc-nav a { background: var(--card); border: 1px solid var(--border); padding: 10px 15px; border-radius: 8px; color: var(--fg); font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+.doc-nav a:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.news-article { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; margin-bottom: 3rem; box-shadow: var(--shadow); scroll-margin-top: 150px; }
+.news-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.news-badge { background: var(--accent); color: #fff; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+.news-badge.urgent { background: var(--danger); }
+.news-badge.doc { background: var(--success); }
+.news-badge.info { background: var(--warning); color: #000;}
+.news-date { color: var(--muted); font-size: 0.9rem; font-weight: 600; }
+.news-title { font-size: 1.8rem; color: var(--fg); margin: 0 0 1.5rem 0; line-height: 1.3; text-align: center; }
+
+.news-body { color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
+.news-body p { margin-bottom: 1rem; }
+.news-body blockquote { border-left: 4px solid var(--accent); margin: 1.5rem 0; font-style: italic; color: var(--fg); background: var(--bg-alt); padding: 1.5rem; border-radius: 0 8px 8px 0; }
+.news-body ul, .news-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+.news-body li { margin-bottom: 0.5rem; }
+
+/* Стиль для официальных документов */
+.document-style { background: var(--bg-alt); border: 1px solid var(--border); padding: 2.5rem; border-radius: 8px; font-family: 'Times New Roman', Times, serif; color: var(--fg); box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+[data-theme="light"] .document-style { background: #fdfdfd; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); color: #000; }
+.document-style h3 { text-align: center; margin-top: 0; color: var(--fg); font-size: 1.4rem; line-height: 1.4; margin-bottom: 1.5rem; text-transform: uppercase; }
+.document-style h4 { margin-top: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; color: var(--fg); font-size: 1.1rem; }
+.document-style p { margin-bottom: 0.8rem; text-align: justify; }
+.document-style ol, .document-style ul { padding-left: 2rem; margin-bottom: 1.5rem; text-align: justify; }
+.document-style li { margin-bottom: 0.6rem; }
+.doc-signatures { margin-top: 2.5rem; border-top: 2px dashed var(--border); padding-top: 1.5rem; }
+.doc-signatures p { margin: 0.4rem 0; display: flex; justify-content: space-between; align-items: flex-end; }
+.doc-signatures span { border-bottom: 1px solid var(--muted); flex-grow: 1; margin: 0 15px; display: inline-block; height: 1em; }
+
+/* Подвал */
+.site-footer{border-top:1px solid var(--border);background:var(--bg-alt);padding:2rem 1rem 3rem; margin-top: auto;}
+.footer-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.footer-block h3{margin-bottom:1rem;color:var(--fg);border-bottom:2px solid var(--accent);padding-bottom:.5rem}
+.footer-block li{margin-bottom:8px;color:var(--muted);list-style:none}
+.social-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;transition:.3s;color:#fff}
+.social-btn:hover{transform:scale(1.1);filter:brightness(1.15)}
+.social-icon{width:20px;height:20px;fill:currentColor}
+.social-yt{background:#FF0000}.social-tg{background:#229ED9}.social-fb{background:#1877F2}.social-x{background:#000;border:1px solid #333}.social-ig{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
+.social-tt{background:#000;border:1px solid #333}
+</style>
+</head>
+<body>
+
+<header class="flag-header">
+  <div class="flag-stripe stripe-white top-stripe"></div>
+  <div class="flag-stripe stripe-red middle-stripe">
+    <div class="header-marquee-text" data-i18n="marquee">ЦЕНТРАЛЬНАЯ ИЗБИРАТЕЛЬНАЯ КОМИССИЯ • ЦИК • ЗАЩИТА ПРАВ • СВОБОДА • БЕЗОПАСНОСТЬ И СПРАВЕДЛИВОСТЬ • </div>
+  </div>
+  <div class="flag-stripe stripe-white bottom-stripe">
+    <div class="header-inner">
+      <div class="nav-left-group">
+        <a href="../index.html" class="nav-logo holo-text">ЦИК</a>
+        <nav class="nav-links">
+          <a href="../index.html" class="nav-link" data-i18n="nav_home">Главная</a>
+          <a href="about.html" class="nav-link" data-i18n="nav_about">О нас</a>
+          <a href="commission.html" class="nav-link" data-i18n="nav_commission">Состав</a>
+          <a href="elections.html" class="nav-link" data-i18n="nav_elections">Выборы</a>
+          <a href="news.html" class="nav-link active" data-i18n="nav_news">Новости</a>
+          <a href="help.html" class="nav-link" data-i18n="nav_help">Помощь</a>
+          <a href="chudo.html" class="nav-link" data-i18n="nav_chudo">CHUDO</a>
+          <a href="donate.html" class="nav-link" data-i18n="nav_donate" style="color:#D22730 !important; font-weight:700">❤️ Поддержать</a>
+          <a href="contact.html" class="nav-link" data-i18n="nav_contact">Контакты</a>
+        </nav>
+      </div>
+      <div class="nav-controls">
+        <div class="lang-globe">
+          <button class="globe-btn" id="globeBtn" type="button" aria-label="Выбрать язык">🌐</button>
+          <div class="globe-flags" id="globeFlags">
+            <a href="#" class="flag-item" data-lang="ru"><span class="fi fi-ru"></span> Русский</a>
+            <a href="#" class="flag-item" data-lang="be"><span style="display:inline-block;width:1.2em;height:0.8em;background:linear-gradient(to bottom,white 33%,red 33%,red 66%,white 66%);border-radius:2px;"></span> Беларуская</a>
+            <a href="#" class="flag-item" data-lang="en"><span class="fi fi-gb"></span> English</a>
+          </div>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему"><span id="themeIcon">☀️</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title holo-text" data-i18n="news_page_title">Новости и Документы</h1>
+
+  <div class="doc-nav">
+    <a href="#appeal-mar1">📣 Обращение (1 марта)</a>
+    <a href="#statement-feb21">🚨 Заявление (21 февраля)</a>
+    <a href="#ultimatum-feb20">📜 Ультиматум (20 февраля)</a>
+    <a href="#statkevich-feb20">ℹ️ О Статкевиче</a>
+    <a href="#protocol">📝 Протокол №1</a>
+    <a href="#reglament">📄 Регламент работы</a>
+    <a href="#palazhenne">📄 Положение о Председателе</a>
+    <a href="#damova">🤝 Учредительный договор</a>
+  </div>
+
+  <article class="news-article" id="appeal-mar1">
+    <div class="news-meta">
+      <span class="news-badge info">Информация</span>
+      <span class="news-date">01.03.2026</span>
+    </div>
+    <h2 class="news-title">Обращение к членам созданной Избирательной комиссии</h2>
+    <div class="news-body">
+      <p>Уважаемые коллеги, члены Избирательной комиссии!</p>
+      <p>Довожу до вашего сведения, что в настоящее время я занимаюсь написанием официальных бумаг и документов в структуры Европейского Союза в Брюссель. Речь идёт о финансировании, юридическом признании нашей комиссии и легитимизации тех исторических решений, которые мы вместе приняли 20 февраля 2026 года в прямом эфире на канале "Чудинович Юра — Точка невозврата".</p>
+      <p>Как только освобожусь от этой работы — каждому делегату комиссии будут направлены официальные протоколы и договора для ознакомления и подписания. Все документы пойдут напрямую, без посредников, без блоков — только персонально каждому, кто взял на себя ответственность за судьбу Беларуси.</p>
+      <p>Также сообщаю важную новость: Мною начата работа по созданию ОФИЦИАЛЬНОГО САЙТА ЦЕНТРАЛЬНОЙ ИЗБИРАТЕЛЬНОЙ КОМИССИИ по выборам в Координационный совет Республики Беларусь.</p>
+      <p>На этом сайте КАЖДЫЙ желающий сможет:</p>
+      <ul>
+        <li>Ознакомиться с полным списком делегатов комиссии</li>
+        <li>Изучить протоколы всех заседаний предвыборной кампании в КС</li>
+        <li>Просмотреть видеозаписи прямых эфиров без цензуры</li>
+        <li>Проконтролировать каждый шаг и каждый цент финансирования</li>
+        <li>Убедиться в прозрачности блокчейн-голосования, разработанного политзеком Чудиновичем Юрием</li>
+      </ul>
+      <p>Никаких тайн от народа. Никаких кулуарных сговоров. Всё — в открытом доступе. Мы строим новую систему. Систему, где нет места агентам КГБ. Где каждый отвечает лично. Где народ видит всё.</p>
+      <p>Ждите протоколы. Готовьтесь к работе. Время пошло.</p>
+      <p><em>С уважением и верой в нашу победу,<br>Юрий Чудинович<br>Политзаключённый, прошедший ад жодинской тюрьмы<br>Кандидат в президенты 2020 года, выдвинутый генералом Статкевичем</em></p>
+    </div>
+  </article>
+
+  <article class="news-article" id="statement-feb21">
+    <div class="news-meta">
+      <span class="news-badge urgent">Важное заявление</span>
+      <span class="news-date">21.02.2026</span>
+    </div>
+    <h2 class="news-title">ПОЗОР БЛОКА КС: Создана НАСТОЯЩАЯ комиссия по выборам!</h2>
+    <div class="news-body">
+      <p>Пять лет манипуляций. Пять лет бездействия. Пять лет блок КС втирал пыль в глаза народу, создавая видимость борьбы, но не сделав НИЧЕГО для освобождения политзаключённых и освобождения Беларуси. Где стратегия? Где результаты? Где политзеки на свободе? Их нет. Был только позор.</p>
+      <p>Но вчера всё изменилось!</p>
+      <p>20 февраля 2026 года в онлайн-формате состоялось историческое событие: Создание ИЗБИРАТЕЛЬНОЙ КОМИССИИ по проведению выборов в Координационный совет. В состав комиссии вошли эксперты, профессора, лидеры мнений, активисты и, главное — политзеки, прошедшие ад жодинской тюрьмы!</p>
+      <p>Заседание проходило В ПРЯМОМ ЭФИРЕ — БЕЗ ЦЕНЗУРЫ на канале "Чудинович Юра — Точка невозврата".</p>
+      <p>Были приняты исторические решения:</p>
+      <ol>
+        <li>Избран НЕЗАВИСИМЫЙ председатель комиссии.</li>
+        <li>Утверждена ОБЯЗАТЕЛЬНАЯ проверка всех кандидатов на полиграфе.</li>
+        <li>Кандидаты подают декларации о доходах за 5 лет.</li>
+        <li>Утверждён порядок голосования на ЦИФРОВОЙ ПЛАТФОРМЕ с использованием БЛОКЧЕЙНА (разработка Юрия Чудиновича).</li>
+        <li>НИКАКИХ БЛОКОВ — ТОЛЬКО ПЕРСОНАЛЬНАЯ ОТВЕТСТВЕННОСТЬ!</li>
+        <li>Установлена ОПЛАТА ТРУДА делегату — 2000 ЕВРО (из бюджета ЕС). Спрос будет за каждый цент!</li>
+        <li>Цель — выработка РЕАЛЬНОЙ СТРАТЕГИИ освобождения Беларуси.</li>
+      </ol>
+      <p>Выборы пройдут с 11 по 17 мая 2026 года. МЫ НЕ ОСТАНОВИМСЯ.</p>
+    </div>
+  </article>
+
+  <article class="news-article" id="ultimatum-feb20">
+    <div class="news-meta">
+      <span class="news-badge urgent">Меморандум</span>
+      <span class="news-date">20.02.2026</span>
+    </div>
+    <h2 class="news-title">МЕМОРАНДУМ-УЛЬТИМАТУМ Инициативной группы политзаключенных</h2>
+    <div class="news-body">
+      <p>Мы, политзаключенные, прошедшие через ад тюрем Беларуси, заявляем: с нас хватит.</p>
+      <p>Сегодня проходит первое заседание Избирательной комиссии по выборам в Координационный совет. Мы не допустим, чтобы этот процесс снова оказался в руках агентуры КГБ. Мы выдвигаем следующие условия:</p>
+      <ol>
+        <li><strong>Председатель:</strong> Должен быть избран председатель, не запятнавший себя связями с режимом.</li>
+        <li><strong>Проверка на полиграфе:</strong> Все кандидаты обязательно проходят проверку. Отказавшиеся считаются агентами.</li>
+        <li><strong>Декларирование доходов:</strong> За последние 5 лет. Никаких сомнительных средств.</li>
+        <li><strong>Защищенные бюллетени:</strong> Выборы проходят только с использованием защищенных бюллетеней на базе кода Юрия Чудиновича.</li>
+        <li><strong>Хранение данных:</strong> Вся информация хранится на холодном кошельке. Никаких систем от спецслужб (GAYUN и т.д.).</li>
+        <li><strong>Заработная плата:</strong> Оплата делегатов составит 2000 евро. Только персональная ответственность.</li>
+        <li><strong>Никаких агентов КГБ:</strong> Нам не нужны Добровольский, Вечерко, Латушко и другие.</li>
+      </ol>
+      <p><strong>ОСОБОЕ ПРИМЕЧАНИЕ:</strong> Те, кто не пройдет полиграф и будет изобличен как агент КГБ, будут признаны предателями народа. Мы готовы дать отпор. Никаких компромиссов.</p>
+      <p><em>Инициативная группа политзаключенных</em></p>
+    </div>
+  </article>
+
+  <article class="news-article" id="statkevich-feb20">
+    <div class="news-meta">
+      <span class="news-badge info">Информация</span>
+      <span class="news-date">20.02.2026</span>
+    </div>
+    <h2 class="news-title">Официальное сообщение: Прямая связь с генералом Статкевичем</h2>
+    <div class="news-body">
+      <p>Товарищи! Сегодня, 20 февраля 2026 года, произошло важное событие. Политзаключенные установили прямую связь с генералом Николаем Статкевичем.</p>
+      <p>Мы получили ответ от него и его семьи. Генерал рассматривает возможность принять участие в первом заседании Избирательной комиссии сегодня в 21:00. Он будет принимать решение исходя из своего состояния здоровья.</p>
+      <p>Напомним: Николай Статкевич перенес тяжелый инсульт, провел месяц в реанимации. Сейчас он дома, восстанавливается. Но он с нами. Он слышит нас. Мы надеемся, что генерал сможет хотя бы в онлайн-режиме присоединиться к обсуждению. Даже его тихое присутствие станет знаком.</p>
+      <p>Мы поддерживаем с генералом Статкевичем прямую связь. Будем держать вас в курсе.</p>
+      <p><em>Инициативная группа политзаключенных</em></p>
+    </div>
+  </article>
+
+  <article class="news-article" id="protocol">
+    <div class="news-meta">
+      <span class="news-badge doc">Официальный документ</span>
+      <span class="news-date">20.02.2026</span>
+    </div>
+    <div class="news-body document-style" id="js-prot">
+      </div>
+  </article>
+
+  <article class="news-article" id="reglament">
+    <div class="news-meta">
+      <span class="news-badge doc">Официальный документ</span>
+      <span class="news-date">20.02.2026</span>
+    </div>
+    <div class="news-body document-style" id="js-reg">
+      </div>
+  </article>
+
+  <article class="news-article" id="palazhenne">
+    <div class="news-meta">
+      <span class="news-badge doc">Официальный документ</span>
+      <span class="news-date">20.02.2026</span>
+    </div>
+    <div class="news-body document-style" id="js-pal">
+      </div>
+  </article>
+
+  <article class="news-article" id="damova">
+    <div class="news-meta">
+      <span class="news-badge doc">Официальный документ</span>
+      <span class="news-date">20.01.2026</span>
+    </div>
+    <div class="news-body document-style" id="js-dam">
+      </div>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-block">
+      <h3 class="holo-text" data-i18n="footer_contact">Контакты ЦИК</h3>
+      <ul>
+        <li><strong data-i18n="footer_address">Адрес:</strong> Польша, Варшава, ul. Lokcowa 12</li>
+        <li><strong>Email:</strong> <a href="mailto:yury@chudzinovich.de">yury@chudzinovich.de</a></li>
+        <li><strong data-i18n="footer_phone">Телефон:</strong> <a href="tel:+48795972990">+48 795 972 990</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-block">
+      <h3 class="holo-text" data-i18n="footer_social">Соцсети</h3>
+      <div class="social-grid">
+        <a href="https://www.youtube.com/channel/UCTXAwovvaec4w9ztbggWMEQ" target="_blank" class="social-btn social-yt" aria-label="YouTube"><svg class="social-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://t.me/+48795972990" target="_blank" class="social-btn social-tg" aria-label="Telegram"><svg class="social-icon" viewBox="0 0 24 24"><path d="M11.944 0C5.347 0 0 5.347 0 11.944c0 6.597 5.347 11.944 11.944 11.944 6.597 0 11.944-5.347 11.944-11.944C23.888 5.347 18.541 0 11.944 0zm5.204 8.12l-1.764 8.312c-.133.593-.483.738-.982.458l-2.686-1.98-1.296 1.246c-.144.144-.264.264-.54.264l.192-2.73 4.968-4.488c.216-.192-.048-.3-.336-.108L8.568 12.44 5.916 11.61c-.576-.18-.588-.576.12-.852l10.38-4.008c.48-.18.9.108.732.372z"/></svg></a>
+        <a href="https://www.facebook.com/share/1bJi1GCA85/" target="_blank" class="social-btn social-fb" aria-label="Facebook"><svg class="social-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://x.com/CHUDZINOVICH1" target="_blank" class="social-btn social-x" aria-label="X (Twitter)"><svg class="social-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/chudzinovichyury" target="_blank" class="social-btn social-ig" aria-label="Instagram"><svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949 0-3.259-.014-3.667-.072-4.947-.072-4.358-2.618-6.78-6.98-6.98C15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://tiktok.com/@chudzinovich" target="_blank" class="social-btn social-tt" aria-label="TikTok"><svg class="social-icon" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+      </div>
+    </div>
+    </div>
+  <p style="text-align:center;margin-top:2rem;color:var(--muted);font-size:.8rem">© 2026 <span data-i18n="footer_copy">Центральная избирательная комиссия</span></p>
+</footer>
+
+<script>
+// --- РУССКИЕ ВЕРСИИ ДОКУМЕНТОВ ---
+const prot_ru = `
+  <h3>ПРОТОКОЛ № 1<br>заседания Центральной избирательной комиссии (ЦИК)</h3>
+  <p><strong>20 февраля 2026 года</strong> <span style="float:right"><strong>г. Варшава (дистанционно)</strong></span></p>
+  <p>Заседание началось в прямом эфире в формате видеоконференцсвязи. Видеозапись доступна на YouTube-канале «Чудинович Юра — Точка невозврата».</p>
+  
+  <h4>Присутствовали члены ЦИК (5 человек):</h4>
+  <ol><li>Юрий Чудинович</li><li>Олег Желнов</li><li>Роман Золотовицкий</li><li>Иван Касперович</li><li>Денис Собко</li></ol>
+  <h4>Приглашенные (наблюдатели-волонтеры):</h4>
+  <ul><li>Александр Ергулевич (секретарь)</li><li>Дмитрий Богаченко (юрист)</li></ul>
+
+  <h4>Повестка дня:</h4>
+  <ol>
+    <li>Представление членов Центральной избирательной комиссии и приглашенных лиц.</li>
+    <li>Избрание Председателя ЦИК и назначение Секретаря и Юриста.</li>
+    <li>Утверждение Регламента работы и Учредительного договора.</li>
+    <li>Утверждение базовых принципов избирательной кампании и требований к кандидатам.</li>
+    <li>Внедрение системы блокчейн-голосования.</li>
+  </ol>
+
+  <h4>1. Представление состава</h4>
+  <p>Состав Комиссии был представлен аудитории. Каждый из 5 независимых экспертов подтвердил свое добровольное участие. <strong>РЕШИЛИ:</strong> Принять к сведению информацию о составе ЦИК.</p>
+
+  <h4>2. Избрание руководящего состава</h4>
+  <p><strong>РЕШИЛИ (Единогласно):</strong><br>
+  2.1. Избрать Председателем ЦИК Юрия Чудиновича.<br>
+  2.2. Утвердить А. Ергулевича в статусе наблюдателя-волонтера с функциями Секретаря.<br>
+  2.3. Утвердить Д. Богаченко в статусе наблюдателя-волонтера с функциями Юриста.</p>
+
+  <h4>3. Утверждение документов</h4>
+  <p><strong>РЕШИЛИ:</strong> Утвердить Регламент работы ЦИК. Официальным каналом коммуникации утверждена почта: yury@chudzinovich.de.</p>
+
+  <h4>4. Утверждение принципов выборов и требований к кандидатам</h4>
+  <p><strong>РЕШИЛИ (Единогласно утвердить следующие исторические нормы):</strong><br>
+  4.1. Ввести <strong>обязательную проверку на полиграфе</strong> для всех кандидатов в Координационный Совет.<br>
+  4.2. Обязать кандидатов предоставлять <strong>декларации о доходах за последние 5 лет</strong>.<br>
+  4.3. Категорически запретить политические "блоки". Утвердить принцип исключительно <strong>персональной ответственности</strong> каждого делегата.<br>
+  4.4. Установить целевую оплату труда делегатам КС в размере <strong>2000 евро</strong> из привлеченных средств бюджета ЕС со строгой подотчетностью за результаты.<br>
+  4.5. Зафиксировать главной целью КС — выработку реальной стратегии освобождения Беларуси.</p>
+
+  <h4>5. Блокчейн-голосование</h4>
+  <p><strong>РЕШИЛИ:</strong> Утвердить порядок голосования исключительно на защищенной цифровой платформе с использованием технологии <strong>БЛОКЧЕЙН</strong> (разработка Юрия Чудиновича). Данные будут храниться на холодных кошельках для гарантии безопасности избирателей.</p>
+
+  <div class="doc-signatures">
+    <p><em>Протокол подписан дистанционно с использованием цифровых подписей.</em></p>
+    <p><strong>Председатель ЦИК:</strong> <span></span> Ю. Чудинович</p>
+    <p><strong>Члены ЦИК (4):</strong> <span></span> О. Желнов, Р. Золотовицкий, И. Касперович, Д. Собко</p>
+    <p><strong>Секретарь (волонтер):</strong> <span></span> А. Ергулевич</p>
+  </div>
+`;
+
+const reg_ru = `
+  <h3>РЕШЕНИЕ ИЗБИРАТЕЛЬНОЙ КОМИССИИ<br>«Об утверждении Регламента работы Избирательной комиссии по проведению выборов»</h3>
+  <p><strong>20 февраля 2026 года</strong> <span style="float:right"><strong>г. Варшава</strong></span></p>
+  <p>Руководствуясь принципами проведения демократических выборов и необходимостью обеспечения максимальной прозрачности электорального процесса, Избирательная комиссия утверждает настоящий Регламент.</p>
+  <h4>РЕГЛАМЕНТ РАБОТЫ ИЗБИРАТЕЛЬНОЙ КОМИССИИ</h4>
+  <ol>
+    <li>Избирательная комиссия осуществляет свою деятельность открыто, информируя граждан о ходе подготовки к выборам, принимаемых решениях и результатах рассмотрения жалоб на публичных заседаниях.</li>
+    <li>Заседания созываются не реже одного раза в две недели. Они могут проходить в формате личного присутствия или онлайн-конференций. К участию допускаются представители прессы, наблюдатели и эксперты.</li>
+    <li>Для обеспечения доступности, заседания транслируются в прямом эфире на YouTube с предварительным оповещением.</li>
+    <li>Официальные решения и протоколы размещаются на информационных ресурсах не позднее следующего дня после заседания.</li>
+    <li>Любое заинтересованное лицо имеет право обжаловать протокол заседания в течение трех дней с момента его публикации.</li>
+    <li>Официальным каналом для направления обращений признается электронная почта: yury@chudzinovich.de. Комиссия обязана предоставить ответ в срок до 3 дней.</li>
+    <li>В случае возникновения непреодолимых препятствий для работы Комиссии или грубого вмешательства в процесс со стороны спецслужб или иных субъектов, члены Комиссии обязуются немедленно сделать публичное заявление для защиты независимости выборов.</li>
+  </ol>
+  <div class="doc-signatures">
+    <p><strong>Члены Избирательной Комиссии:</strong> <span></span> Ю. Чудинович, О. Желнов, Р. Золотовицкий, И. Касперович, Д. Собко</p>
+  </div>
+`;
+
+const pal_ru = `
+  <h3>РЕШЕНИЕ ИЗБИРАТЕЛЬНОЙ КОМИССИИ<br>«Об утверждении Положения о выборах Председателя Избирательной комиссии»</h3>
+  <p><strong>20 февраля 2026 года</strong> <span style="float:right"><strong>г. Варшава</strong></span></p>
+  <p>Избирательная комиссия в лице Юрия Чудиновича, Олега Желнова, Романа Золотовицкого, Ивана Касперовича и Дениса Собко утверждает процедуру избрания Председателя.</p>
+  <h4>ПОЛОЖЕНИЕ о выборах Председателя Избирательной комиссии</h4>
+  <ol>
+    <li>Председатель Избирательной комиссии избирается из числа ее полноправных членов путем тайного голосования в ходе открытого заседания.</li>
+    <li>Кандидаты могут быть выдвинуты путем самовыдвижения либо предложены другими членами Комиссии. Главное условие — отсутствие связей с режимом и спецслужбами.</li>
+    <li>Для победы в первом туре кандидат должен получить более половины голосов от общего числа членов Комиссии (простое большинство).</li>
+    <li>Ответственность за организацию процедуры голосования и объявление итогов возлагается на ведущего заседание.</li>
+  </ol>
+  <div class="doc-signatures">
+    <p><strong>Члены Избирательной Комиссии:</strong> <span></span> Ю. Чудинович, О. Желнов, Р. Золотовицкий, И. Касперович, Д. Собко</p>
+  </div>
+`;
+
+const dam_ru = `
+  <h3>УЧРЕДИТЕЛЬНЫЙ ДОГОВОР<br>о совместной деятельности членов Избирательной комиссии</h3>
+  <p><strong>20 января 2026 года</strong> <span style="float:right"><strong>г. Варшава</strong></span></p>
+  <p>Принимая на себя ответственность за организацию прозрачного и независимого электорального процесса;</p>
+  <p>Выражая глубокую благодарность за доверие, оказанное нам политическими заключенными, чье мужество и стойкость являются ориентиром для нашей работы;</p>
+  <p>Стремясь обеспечить безопасную и неподкупную систему голосования, свободную от внешнего вмешательства агентуры КГБ/ФСБ,</p>
+  <p>Мы, <strong>Юрий Чудинович, Олег Желнов, Роман Золотовицкий, Иван Касперович и Денис Собко</strong>, заключаем настоящее соглашение:</p>
+  <ol>
+    <li>Избирательная комиссия формируется исключительно для подготовки и проведения честных выборов. Вся деятельность Комиссии направлена на обеспечение легитимности этого процесса.</li>
+    <li>Обеспечение безопасности данных избирателей является безусловным приоритетом. Комиссия использует только защищенные блокчейн-платформы и холодные кошельки. Использование скомпрометированных платформ строго запрещено.</li>
+    <li>Каждый член Комиссии обязуется придерживаться высоких этических стандартов, избегать политических сговоров ("блоков") и нести строгую персональную ответственность за свои действия.</li>
+    <li>Комиссия гарантирует доступ независимых наблюдателей к контролю за ходом выборов в рамках установленных протоколов безопасности.</li>
+  </ol>
+  <div class="doc-signatures">
+    <p><strong>Подписи членов:</strong> <span></span> Ю. Чудинович, О. Желнов, Р. Золотовицкий, И. Касперович, Д. Собко</p>
+  </div>
+`;
+
+// --- БЕЛОРУССКИЕ ВЕРСИИ ---
+const prot_be = prot_ru.replace(/ПРОТОКОЛ/g, "ПРАТАКОЛ").replace(/заседания/g, "пасяджэння").replace(/февраля/g, "лютага");
+const reg_be = reg_ru.replace(/РЕШЕНИЕ/g, "РАШЭННЕ");
+const pal_be = pal_ru.replace(/РЕШЕНИЕ/g, "РАШЭННЕ");
+const dam_be = dam_ru.replace(/УЧРЕДИТЕЛЬНЫЙ ДОГОВОР/g, "УСТАНОЎЧАЯ ДАМОВА");
+
+const translations = {
+  ru: {
+    marquee: "ЦЕНТРАЛЬНАЯ ИЗБИРАТЕЛЬНАЯ КОМИССИЯ • ЦИК • ЗАЩИТА ПРАВ • СВОБОДА • БЕЗОПАСНОСТЬ И СПРАВЕДЛИВОСТЬ • ",
+    nav_home: "Главная", nav_about: "О нас", nav_commission: "Состав", nav_elections: "Выборы", nav_news: "Новости", nav_help: "Помощь", nav_donate: "❤️ Поддержать", nav_chudo: "CHUDO", nav_contact: "Контакты",
+    news_page_title: "Новости и Официальные документы",
+    footer_contact: "Контакты ЦИК", footer_address: "Адрес:", footer_phone: "Телефон:", footer_social: "Соцсети", footer_copy: "Центральная избирательная комиссия"
+  },
+  be: {
+    marquee: "ЦЭНТРАЛЬНАЯ ВЫБАРЧАЯ КАМІСІЯ • ЦВК • АБАРОНА ПРАВОЎ • СВАБОДА • БЯСПЕКА І СПРАВЯДЛІВАСЦЬ • ",
+    nav_home: "Галоўная", nav_about: "Пра нас", nav_commission: "Склад", nav_elections: "Выбары", nav_news: "Навіны", nav_help: "Дапамога", nav_donate: "❤️ Падтрымаць", nav_chudo: "CHUDO", nav_contact: "Кантакты",
+    news_page_title: "Навіны і Афіцыйныя дакументы",
+    footer_contact: "Кантакты ЦВК", footer_address: "Адрас:", footer_phone: "Тэлефон:", footer_social: "Сацыяльныя сеткі", footer_copy: "Цэнтральная выбарчая камісія"
+  },
+  en: {
+    marquee: "CENTRAL ELECTORAL COMMISSION • CEC • RIGHTS PROTECTION • FREEDOM • SECURITY AND JUSTICE • ",
+    nav_home: "Home", nav_about: "About", nav_commission: "Members", nav_elections: "Elections", nav_news: "News", nav_help: "Help", nav_donate: "❤️ Donate", nav_chudo: "CHUDO", nav_contact: "Contact",
+    news_page_title: "News and Official Documents",
+    footer_contact: "CEC Contacts", footer_address: "Address:", footer_phone: "Phone:", footer_social: "Social Networks", footer_copy: "Central Election Commission"
+  }
+};
+
+function applyLang(lang) {
+  if (!translations[lang]) lang = 'ru';
+  document.documentElement.lang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+  
+  // Вставляем документы
+  document.getElementById('js-prot').innerHTML = lang === 'ru' ? prot_ru : prot_be;
+  document.getElementById('js-reg').innerHTML = lang === 'ru' ? reg_ru : reg_be;
+  document.getElementById('js-pal').innerHTML = lang === 'ru' ? pal_ru : pal_be;
+  document.getElementById('js-dam').innerHTML = lang === 'ru' ? dam_ru : dam_be;
+
+  document.querySelectorAll('.flag-item').forEach(f => f.classList.remove('active'));
+  const activeFlag = document.querySelector(`.flag-item[data-lang="${lang}"]`);
+  if (activeFlag) activeFlag.classList.add('active');
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  let savedLang = 'ru';
+  try { savedLang = localStorage.getItem('lang') || 'ru'; } catch(e) {}
+  applyLang(savedLang);
+
+  document.getElementById('globeBtn').addEventListener('click', function(e) {
+    e.stopPropagation(); document.getElementById('globeFlags').classList.toggle('show');
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.lang-globe')) document.getElementById('globeFlags').classList.remove('show');
+  });
+  document.querySelectorAll('.flag-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault(); applyLang(item.getAttribute('data-lang')); document.getElementById('globeFlags').classList.remove('show');
+    });
+  });
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    const html = document.documentElement;
+    const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    try { localStorage.setItem('theme', newTheme); } catch(e) {}
+  });
+
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem('theme'); } catch(e) {}
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  }
+  
+  // Плавная прокрутка для навигации
+  document.querySelectorAll('.doc-nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+});
+</script>
+</body>
+</html>

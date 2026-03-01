@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>CHUDO AGENT v2.1</title>
+<style>
+body{margin:0;font-family:monospace;background:#0d1117;color:#c9d1d9;display:flex;height:100vh;overflow:hidden}
+.sidebar{width:200px;background:#161b22;border-right:1px solid #30363d;padding:20px;display:flex;flex-direction:column;gap:10px}
+.sidebar h2{color:#fff;text-align:center;margin:0 0 20px;font-size:16px}
+.nav-btn{background:none;border:none;color:#8b949e;padding:12px;cursor:pointer;text-align:left;font-size:14px;border-radius:6px}
+.nav-btn:hover,.nav-btn.active{background:#238636;color:#fff}
+.main{flex:1;padding:20px;display:flex;flex-direction:column;overflow:hidden}
+.screen{display:none;height:100%;flex-direction:column}
+.screen.active{display:flex}
+.status-box{padding:15px;border:1px solid #30363d;border-radius:6px;margin-bottom:15px;background:#161b22;display:flex;gap:15px;align-items:center}
+.status-active{color:#3fb950;font-weight:bold}
+.status-stopped{color:#f85149;font-weight:bold}
+.btn{padding:8px 16px;border:none;border-radius:6px;cursor:pointer;color:#fff;font-weight:bold}
+.btn-green{background:#238636}.btn-red{background:#da3633}.btn-blue{background:#1f6feb}
+#logs{flex:1;background:#000;color:#0f0;padding:10px;border:1px solid #30363d;border-radius:6px;overflow-y:auto;white-space:pre-wrap;font-size:12px}
+.file-list{flex:1;background:#000;border:1px solid #30363d;border-radius:6px;padding:10px;overflow-y:auto}
+.file-item{padding:8px;cursor:pointer;border-radius:4px;display:flex;align-items:center;gap:8px}
+.file-item:hover{background:#21262d}
+.folder{color:#58a6ff}.file{color:#c9d1d9}
+#editor{flex:1;background:#0d1117;color:#e6edf3;border:1px solid #30363d;padding:15px;font-family:monospace;font-size:13px;resize:none;outline:none;border-radius:6px}
+.path-display{color:#8b949e;font-size:12px}
+input[type=text]{background:#0d1117;border:1px solid #30363d;color:#fff;padding:8px;border-radius:4px}
+.chat-box{flex:1;background:#000;border:1px solid #30363d;border-radius:6px;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:15px}
+.chat-msg{max-width:80%;padding:10px 15px;border-radius:12px;word-wrap:break-word}
+.chat-msg.user{align-self:flex-end;background:#238636;color:#fff}
+.chat-msg.agent{align-self:flex-start;background:#21262d;border:1px solid #30363d}
+.chat-input-area{display:flex;gap:10px}
+.chat-input{flex:1;background:#0d1117;border:1px solid #30363d;color:#fff;padding:12px;border-radius:6px;font-family:inherit}
+.chat-send{padding:12px 24px;background:#238636;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="sidebar">
+<h2>🤖 CHUDO<br>AGENT</h2>
+<button class="nav-btn active" onclick="show('chat',this)">💬 Чат</button>
+<button class="nav-btn" onclick="show('node',this)">📡 Нода</button>
+<button class="nav-btn" onclick="show('files',this)">📂 Файлы</button>
+<button class="nav-btn" onclick="show('editor',this)">📝 Редактор</button>
+</div>
+
+<div class="main">
+<div id="chat" class="screen active">
+<div class="chat-box" id="chat-box">
+<div class="chat-msg agent">Привет! Я CHUDO Agent. Я могу помочь с кодом, файлами и нодой. Просто напишите мне!</div>
+</div>
+<div class="chat-input-area">
+<input type="text" class="chat-input" id="chat-in" placeholder="Ваш вопрос..." onkeypress="if(event.key==='Enter')send()">
+<button class="chat-send" onclick="send()">➤</button>
+</div>
+</div>
+
+<div id="node" class="screen">
+<div class="status-box">
+<span>СТАТУС: <span id="st" class="status-stopped">ОСТАНОВЛЕН</span></span>
+<button class="btn btn-green" onclick="fetch('/start_node',{method:'POST'})">▶ СТАРТ</button>
+<button class="btn btn-red" onclick="fetch('/stop_node',{method:'POST'})">⏹ СТОП</button>
+</div>
+<div id="logs">Ожидание...</div>
+</div>
+
+<div id="files" class="screen">
+<div class="status-box">
+<input type="text" id="folder-name" placeholder="Имя папки" style="flex:1">
+<button class="btn btn-blue" onclick="mkfolder()">📁 Создать</button>
+<button class="btn btn-green" onclick="loadfiles()">🔄 Обновить</button>
+</div>
+<div id="file-list" class="file-list"></div>
+</div>
+
+<div id="editor" class="screen">
+<div class="status-box">
+<span class="path-display" id="file-path">Файл не выбран</span>
+<button class="btn btn-green" onclick="savefile()" style="margin-left:auto">💾 Сохранить</button>
+</div>
+<textarea id="editor-ta" spellcheck="false"></textarea>
+</div>
+</div>
+
+<script>
+let curFile=null;
+function show(id,btn){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+if(id==='files')loadfiles();
+}
+function send(){
+const inp=document.getElementById('chat-in');
+const txt=inp.value.trim();
+if(!txt)return;
+addChat(txt,'user');
+inp.value='';
+fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:txt})})
+.then(r=>r.json()).then(d=>addChat(d.response,'agent'));
+}
+function addChat(txt,cls){
+const box=document.getElementById('chat-box');
+const div=document.createElement('div');
+div.className='chat-msg '+cls;
+div.textContent=txt;
+box.appendChild(div);
+box.scrollTop=box.scrollHeight;
+}
+setInterval(()=>{
+fetch('/status').then(r=>r.json()).then(d=>{
+const st=document.getElementById('st');
+st.textContent=d.running?'АКТИВЕН':'ОСТАНОВЛЕН';
+st.className=d.running?'status-active':'status-stopped';
+document.getElementById('logs').textContent=d.logs.join('\n');
+});
+},1000);
+function loadfiles(){
+fetch('/api/files').then(r=>r.json()).then(d=>{
+const list=document.getElementById('file-list');
+list.innerHTML='';
+d.items.forEach(i=>{
+const div=document.createElement('div');
+div.className='file-item '+(i.is_dir?'folder':'file');
+div.textContent=(i.is_dir?'📁':'📄')+' '+i.name;
+div.onclick=()=>i.is_dir?null:openfile(i.path);
+list.appendChild(div);
+});
+});
+}
+function mkfolder(){
+const name=document.getElementById('folder-name').value;
+if(!name)return;
+fetch('/api/create_folder',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name})})
+.then(()=>{document.getElementById('folder-name').value='';loadfiles();});
+}
+function openfile(path){
+curFile=path;
+fetch('/api/read_file?path='+path).then(r=>r.json()).then(d=>{
+document.getElementById('editor-ta').value=d.content||d.error;
+document.getElementById('file-path').textContent=path;
+show('editor',document.querySelectorAll('.nav-btn')[3]);
+});
+}
+function savefile(){
+if(!curFile)return alert('Файл не выбран');
+fetch('/api/save_file',{method:'POST',headers:{'Content-Type':'application/json'},
+body:JSON.stringify({path:curFile,content:document.getElementById('editor-ta').value})})
+.then(r=>r.json()).then(d=>alert(d.success?'Сохранено!':'Ошибка: '+d.error));
+}
+</script>
+</body>
+</html>

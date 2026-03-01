@@ -1,0 +1,26 @@
+syntax = "proto3";
+package chudo;
+
+service NodeService {
+  rpc GetStatus (Empty) returns (NodeStatus);
+  rpc SendCommand (CommandRequest) returns (CommandResponse);
+}
+
+message Empty {}
+
+message NodeStatus {
+  bool running = 1;
+  uint64 block_height = 2;
+  int32 peer_count = 3;
+  string last_block_hash = 4;
+}
+
+message CommandRequest {
+  string command = 1;
+  string params = 2;
+}
+
+message CommandResponse {
+  bool success = 1;
+  string message = 2;
+}

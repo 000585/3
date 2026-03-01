@@ -1,106 +1,64 @@
+﻿import os
 import subprocess
-import sys
+import threading
+import time
+import grpc
+from flask import Flask, render_template, jsonify, request
+
 try:
-    import ollama
+    import node_pb2
+    import node_pb2_grpc
+    GRPC_AVAILABLE = True
 except ImportError:
-    print('Error: ollama library not found. Run: pip install ollama')
-    sys.exit(1)
+    GRPC_AVAILABLE = False
 
-def clean_code(raw_text):
-    lines = raw_text.split(chr(10))
-    clean_lines = []
-    is_code_block = False
-    
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith('```'):
-            is_code_block = not is_code_block
-            continue
-        if not is_code_block:
-            if stripped.lower().startswith('here is') or stripped.lower().startswith('sure') or stripped.lower().startswith('this script'):
-                continue
-        clean_lines.append(line)
-            
-    return chr(10).join(clean_lines).strip()
+app = Flask(__name__)
+NODE_PROCESS = None
+NODE_LOGS = []
 
-def execute_os_command(command, shell_type='python'):
-    try:
-        if shell_type == 'python':
-            result = subprocess.run([sys.executable, '-c', command], capture_output=True, text=True, timeout=60)
-        else:
-            result = subprocess.run(['powershell', '-Command', command], capture_output=True, text=True, timeout=60)
-            
-        output = result.stdout
-        if result.stderr:
-            output += chr(10) + 'Error/Warning: ' + result.stderr
-        return output.strip() or '(Command executed with no output)'
-    except Exception as e:
-        return f'Execution Failed: {str(e)}'
-
-def get_ai_code(prompt):
-    system_msg = 'You are a CLI coding assistant. Return ONLY executable code. No markdown formatting, no explanations. If asked for Python, provide Python. If asked for system commands, provide PowerShell.'
+class BlockchainClient:
+    def __init__(self, port=50054):
+        self.target = f"127.0.0.1:{port}"
     
-    try:
-        response = ollama.chat(model='qwen2.5-coder:1.5b', messages=[
-            {'role': 'system', 'content': system_msg},
-            {'role': 'user', 'content': prompt}
-        ])
-        return clean_code(response['message']['content'])
-    except Exception as e:
-        return f'AI Error: {str(e)}'
-
-def main():
-    print('='*50)
-    print('CHUDO AGENT v0.5 (PowerShell Fix)')
-    print('Model: qwen2.5-coder:1.5b')
-    print('Type "exit" to quit, "auto" to toggle mode')
-    print('='*50)
-    
-    auto_mode = False
-    
-    while True:
+    def get_status(self):
+        if not GRPC_AVAILABLE: return {"error": "gRPC modules missing"}
         try:
-            user_input = input(chr(10) + '> ').strip()
-            
-            if user_input.lower() in ['exit', 'quit']:
-                break
-                
-            if user_input.lower() == 'auto':
-                auto_mode = not auto_mode
-                print(f'Auto-Execute: {auto_mode}')
-                continue
-                
-            if not user_input:
-                continue
-                
-            print('Thinking...')
-            code = get_ai_code(user_input)
-            
-            lang = 'python'
-            # $env: is safe here because of Literal Here-String
-            ps_keywords = ['get-', 'set-', 'new-', 'remove-', 'write-host', '$env:', 'ls ', 'dir ', 'cd ']
-            if any(k in code.lower() for k in ps_keywords):
-                lang = 'powershell'
-                
-            print(f'[{lang.upper()}] Code generated:')
-            print('-'*40)
-            print(code)
-            print('-'*40)
-            
-            if not auto_mode:
-                confirm = input('Run? [Y/n]: ').lower()
-                if confirm not in ['y', 'yes', '']:
-                    print('Skipped.')
-                    continue
-            
-            print('Running...')
-            result = execute_os_command(code, lang)
-            print('Result:')
-            print(result)
-            
-        except KeyboardInterrupt:
-            print('Exiting...')
-            break
+            with grpc.insecure_channel(self.target) as channel:
+                stub = node_pb2_grpc.NodeServiceStub(channel)
+                response = stub.GetStatus(node_pb2.Empty(), timeout=1)
+                return {
+                    "running": response.running,
+                    "height": response.block_height,
+                    "peers": response.peer_count,
+                    "hash": response.last_block_hash
+                }
+        except Exception as e:
+            return {"error": "Offline", "details": str(e)}
 
-if __name__ == '__main__':
-    main()
+grpc_client = BlockchainClient()
+
+class CHUDOAssistant:
+    def answer(self, question):
+        q = question.lower().strip()
+        if any(x in q for x in ["статус", "высота", "блока", "height", "сколько"]):
+            data = grpc_client.get_status()
+            if "error" in data: 
+                return "❌ Нода не отвечает. Убедитесь, что она запущена в соседнем терминале."
+            return f"🧱 Высота блоков: {data['height']} | 📡 Пиров: {data['peers']} | Статус: 🟢 Online"
+        return "Связь с ядром установлена. Спросите про высоту блоков."
+
+assistant = CHUDOAssistant()
+
+@app.route("/")
+def index(): return render_template("index.html")
+
+@app.route("/status")
+def status(): return jsonify({"running": NODE_PROCESS is not None, "logs": NODE_LOGS})
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    msg = request.json.get("message", "")
+    return jsonify({"response": assistant.answer(msg)})
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5000, debug=False)

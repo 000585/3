@@ -1,0 +1,13 @@
+@echo off
+TITLE CHUDO AGENT - DO NOT CLOSE
+cd /d C:\Users\Lenovo\chudo-project
+echo [LAUNCHER] Starting CHUDO Agent...
+echo [LAUNCHER] Waiting for server...
+timeout /t 2 /nobreak >nul
+start http://127.0.0.1:5000
+echo [LAUNCHER] Starting Python server...
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\python.exe chudo_agent.py
+echo.
+echo [LAUNCHER] Server stopped with code %ERRORLEVEL%
+echo [LAUNCHER] Press any key to close...
+pause >nul
